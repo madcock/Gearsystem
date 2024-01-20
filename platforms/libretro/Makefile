@@ -255,11 +255,9 @@ else ifeq ($(platform), sf2000)
    CC = $(MIPS)gcc
    CXX = $(MIPS)g++
    AR = $(MIPS)ar
-   PLATFORM_DEFINES := -DCC_RESAMPLER -DCC_RESAMPLER_NO_HIGHPASS
    CFLAGS = -EL -march=mips32 -mtune=mips32 -msoft-float -G0 -mno-abicalls -fno-pic
    CFLAGS += -ffast-math -fomit-frame-pointer -ffunction-sections -fdata-sections 
-   CFLAGS +=-fno-use-cxa-atexit
-   CFLAGS +=-DSF2000 -DMINIZ_NO_TIME -DMINIZ_NO_STDIO -DPERFORMANCE
+   CFLAGS += -DSF2000 -DMINIZ_NO_TIME
    CXXFLAGS = $(CFLAGS)
    STATIC_LINKING = 1
 # MIYOO
@@ -324,6 +322,11 @@ else
    CXXFLAGS += -O3
 endif
 
+GIT_VERSION ?= " $(shell git describe --abbrev=7 --dirty --always --tags || echo unknown)"
+ifneq ($(GIT_VERSION)," unknown")
+   CXXFLAGS += -DEMULATOR_BUILD=\"$(GIT_VERSION)\"
+endif
+
 include Makefile.common
 
 OBJECTS := $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
@@ -341,9 +344,12 @@ ifeq ($(STATIC_LINKING), 1)
 else
 	$(CXX) $(fpic) $(SHARED) $(INCLUDES) -o $@ $(OBJECTS) $(LDFLAGS)
 endif
-  
-%.o: %.c
+
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(fpic) -c -o $@ $<
+
+%.o: %.c
+	$(CC) $(CXXFLAGS) $(fpic) -c -o $@ $<
 
 clean:
 	rm -f $(OBJECTS) $(TARGET)
