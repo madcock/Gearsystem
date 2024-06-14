@@ -6,7 +6,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/drhelius/Gearsystem)](https://github.com/drhelius/Gearsystem/graphs/contributors)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/drhelius)](https://github.com/sponsors/drhelius)
 [![License](https://img.shields.io/github/license/drhelius/Gearsystem)](https://github.com/drhelius/Gearsystem/blob/master/LICENSE)
-[![Twitter Follow](https://img.shields.io/twitter/follow/drhelius)](https://twitter.com/drhelius)
+[![Twitter Follow](https://img.shields.io/twitter/follow/drhelius)](https://x.com/drhelius)
 
 Gearsystem is a very accurate, cross-platform Sega Master System / Game Gear / SG-1000 emulator written in C++ that runs on Windows, macOS, Linux, BSD and RetroArch.
 
@@ -20,7 +20,9 @@ Don't hesitate to report bugs or ask for new features by [openning an issue](htt
 
 - **Windows**:
   - [Gearsystem-3.5.0-windows.zip](https://github.com/drhelius/Gearsystem/releases/download/3.5.0/Gearsystem-3.5.0-windows.zip)
-  - NOTE: You may need to install the [Microsoft Visual C++ Redistributable](https://go.microsoft.com/fwlink/?LinkId=746572)
+  - NOTE: If you have errors you may need to install:
+    - [Microsoft Visual C++ Redistributable](https://go.microsoft.com/fwlink/?LinkId=746572)
+    - [OpenGL Compatibility Pack](https://apps.microsoft.com/detail/9nqpsl29bfff)
 - **macOS**:
   - [Gearsystem-3.5.0-macos-arm.zip](https://github.com/drhelius/Gearsystem/releases/download/3.5.0/Gearsystem-3.5.0-macos-arm.zip)
   - [Gearsystem-3.5.0-macos-intel.zip](https://github.com/drhelius/Gearsystem/releases/download/3.5.0/Gearsystem-3.5.0-macos-intel.zip)

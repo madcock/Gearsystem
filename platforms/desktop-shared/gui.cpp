@@ -1529,31 +1529,53 @@ static void popup_modal_about(void)
 
         ImGui::Separator();
         
-        #ifdef _WIN64
+        #if defined(_M_ARM64)
+        ImGui::Text("Windows ARM64 build");
+        #endif
+        #if defined(_M_X64)
         ImGui::Text("Windows 64 bit build");
-        #elif defined(_WIN32)
+        #endif
+        #if defined(_M_IX86)
         ImGui::Text("Windows 32 bit build");
         #endif
-        #ifdef __linux__
-        ImGui::Text("Linux build");
+        #if defined(__linux__) && defined(__x86_64__)
+        ImGui::Text("Linux 64 bit build");
         #endif
-        #ifdef __APPLE__
-        ImGui::Text("macOS build");
+        #if defined(__linux__) && defined(__i386__)
+        ImGui::Text("Linux 32 bit build");
         #endif
-        #ifdef _MSC_VER
-        ImGui::Text("Microsoft C++ %d.", _MSC_VER);
+        #if defined(__linux__) && defined(__arm__)
+        ImGui::Text("Linux ARM build");
         #endif
-        #ifdef __MINGW32__
+        #if defined(__linux__) && defined(__aarch64__)
+        ImGui::Text("Linux ARM64 build");
+        #endif
+        #if defined(__APPLE__) && defined(__arm64__ )
+        ImGui::Text("macOS build (Apple Silicon)");
+        #endif
+        #if defined(__APPLE__) && defined(__x86_64__)
+        ImGui::Text("macOS build (Intel)");
+        #endif
+        #if defined(_MSC_FULL_VER)
+        ImGui::Text("Microsoft C++ %d", _MSC_FULL_VER);
+        #endif
+        #if defined(__CLR_VER)
+        ImGui::Text("CLR version: %d", __CLR_VER);
+        #endif
+        #if defined(__MINGW32__)
         ImGui::Text("MinGW 32 bit (%d.%d)", __MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION);
         #endif
-        #ifdef __MINGW64__
+        #if defined(__MINGW64__)
         ImGui::Text("MinGW 64 bit (%d.%d)", __MINGW64_VERSION_MAJOR, __MINGW64_VERSION_MINOR);
         #endif
         #if defined(__GNUC__) && !defined(__llvm__) && !defined(__INTEL_COMPILER)
         ImGui::Text("GCC %d.%d.%d", (int)__GNUC__, (int)__GNUC_MINOR__, (int)__GNUC_PATCHLEVEL__);
         #endif
-        #ifdef __clang_version__
+        #if defined(__clang_version__)
         ImGui::Text("Clang %s", __clang_version__);
+        #endif
+        #if defined(__TIMESTAMP__)
+        ImGui::Text("Generated on: %s", __TIMESTAMP__);
         #endif
 
         ImGui::Separator();
